@@ -1,6 +1,6 @@
 🌟 CS193p Project 🌟
 
-Welcome to my awesome CS193p repository! 🎉 This is where I store my cool iOS apps built for Stanford's CS193p course (Spring 2021) using SwiftUI. Think fun games and creative projects for iPhones! 🚀
+Welcome to my CS193p repository! 🎉 This is where I store my cool iOS apps built for Stanford's CS193p course (Spring 2021) using SwiftUI. Think fun games and creative projects for iPhones! 🚀
 
 🎮 What's Inside?
     Memorize: A super fun card-matching game! 🃏
