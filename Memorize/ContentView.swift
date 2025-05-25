@@ -1,61 +1,40 @@
-//
-//  ContentView.swift
-//  Memorize
-//
-//  Created by Shorya Vardhan on 5/15/25.
-//
-
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+        VStack {
+            Text("⭐️ Guess The Card ⭐️")
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+        HStack {
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: true)
+            CardView()
+            CardView()
         }
+        .font(.largeTitle) //does for all
+        .foregroundColor(.orange)
+        .padding()
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+}
+struct CardView: View {
+    var isFaceUp: Bool = false
+    var body: some View {
+        if (isFaceUp) {
+            ZStack(content: {
+                RoundedRectangle (cornerRadius: 20)
+                    .foregroundColor (.black)
+                RoundedRectangle (cornerRadius: 20)
+                    .strokeBorder(lineWidth: 2)
+                Text ("⭐️") .font(.largeTitle)
+            })
+        }
+        else {
+            RoundedRectangle (cornerRadius: 20)
+                .foregroundColor (.orange)
         }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
