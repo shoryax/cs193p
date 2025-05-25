@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("⭐️ Guess The Card ⭐️")
+            Text("⭐️ Guess A Card ⭐️")
         }
         HStack {
             CardView(isFaceUp: true)
