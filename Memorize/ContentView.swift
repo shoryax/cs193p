@@ -3,34 +3,38 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("⭐️ Guess A Card ⭐️")
+            Text("Guess A Card")
+            HStack {
+                let emojis: Array<String> = ["🗽", "🗼", "🎆", "🎃"]
+                CardView(content: emojis[0], isFaceUp: true)
+                CardView(content: emojis[1])
+                CardView(content: emojis[2], isFaceUp: false)
+                CardView(content: emojis[3], isFaceUp: false)
+            }
+            .font(.largeTitle)
+            .foregroundColor(.orange)
+            .padding()
         }
-        HStack {
-            CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-        }
-        .font(.largeTitle) //does for all
-        .foregroundColor(.orange)
-        .padding()
     }
 }
+
 struct CardView: View {
-    var isFaceUp: Bool = false
+    let content: String
+    @State var isFaceUp: Bool = false
     var body: some View {
-        if (isFaceUp) {
-            ZStack(content: {
-                RoundedRectangle (cornerRadius: 20)
-                    .foregroundColor (.black)
-                RoundedRectangle (cornerRadius: 20)
-                    .strokeBorder(lineWidth: 2)
-                Text ("⭐️") .font(.largeTitle)
-            })
+        ZStack {
+            let base = RoundedRectangle(cornerRadius: 12)
+            if isFaceUp {
+                    base.fill(.white)
+                    base.strokeBorder(lineWidth: 2)
+                Text(content) .font(.largeTitle)
+            } else {
+                base.fill()
+            }
         }
-        else {
-            RoundedRectangle (cornerRadius: 20)
-                .foregroundColor (.orange)
+        .onTapGesture {
+//            isFaceUp = !isFaceUp can be this but that thing is suitable for boolean types
+            isFaceUp.toggle()
         }
     }
 }
