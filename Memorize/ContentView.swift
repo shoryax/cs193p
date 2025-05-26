@@ -8,33 +8,41 @@ struct ContentView: View {
         VStack {
             Text("Card Game")
                 .font(.largeTitle)
-                .foregroundColor(.orange)
+                .foregroundColor(.gray)
             
-            HStack {
+            LazyVGrid(columns: [GridItem(. adaptive (minimum: 120))]) {
                 ForEach(0..<cardCount, id: \.self) { index in
                     CardView(content: emojis[index])
                 }
             }
-            .foregroundColor(.orange)
+            .foregroundColor(.teal)
             
             HStack {
-                Button("Add Card") {
+                Button(action: {
                     if cardCount < emojis.count {
                         cardCount += 1
                     }
-                }
+                }, label: {
+                    Image(systemName: "rectangle.stack.badge.plus.fill")
+                })
+                .imageScale(. large)
                 .font(.title2)
                 .padding()
                 .disabled(cardCount >= emojis.count)
+                .foregroundColor(.mint)
                 
-                Button("Remove Card") {
+                Button(action: {
                     if cardCount > 0 {
                         cardCount -= 1
                     }
-                }
+                }, label: {
+                    Image(systemName: "rectangle.stack.badge.minus.fill")
+                })
+                .imageScale(. large)
                 .font(.title2)
                 .padding()
                 .disabled(cardCount <= 0)
+                .foregroundColor(.mint)
             }
         }
         .padding()
@@ -54,7 +62,7 @@ struct CardView: View {
                 Text(content)
                     .font(.largeTitle)
             } else {
-                base.fill(.orange)
+                base.fill(.teal)
             }
         }
         .onTapGesture {
