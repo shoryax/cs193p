@@ -3,13 +3,12 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("Guess A Card")
+            let emojis: Array<String> = ["🗽", "🗼", "🎆", "🎃"]
+            Text("Card Game ")
             HStack {
-                let emojis: Array<String> = ["🗽", "🗼", "🎆", "🎃"]
-                CardView(content: emojis[0], isFaceUp: true)
-                CardView(content: emojis[1])
-                CardView(content: emojis[2], isFaceUp: false)
-                CardView(content: emojis[3], isFaceUp: false)
+                ForEach(0..<4, id: \.self) { index in
+                    CardView(content: emojis[index])
+                }
             }
             .font(.largeTitle)
             .foregroundColor(.orange)
@@ -20,7 +19,7 @@ struct ContentView: View {
 
 struct CardView: View {
     let content: String
-    @State var isFaceUp: Bool = false
+    @State var isFaceUp: Bool = true
     var body: some View {
         ZStack {
             let base = RoundedRectangle(cornerRadius: 12)
