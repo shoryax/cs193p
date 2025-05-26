@@ -3,10 +3,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            let emojis: Array<String> = ["🗽", "🗼", "🎆", "🎃"]
+            let emojis: Array<String> = ["🗽", "🗼", "🎆", "🎃", "a"]
             Text("Card Game ")
             HStack {
-                ForEach(0..<4, id: \.self) { index in
+                ForEach(emojis.indices, id: \.self) { index in //(0..<4) in place of emojis.indices
                     CardView(content: emojis[index])
                 }
             }
