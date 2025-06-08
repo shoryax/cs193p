@@ -1,51 +1,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis: [String] = ["🗽", "🗼", "🎆", "🎃", "🍣", "🍫", "🍡", "🍦"]
-    @State var cardCount: Int = 4
+    let emojis: [String] = ["🗽", "🗼", "🎆", "🎃", "🍣", "🍫", "🍡", "🍦", "🫧", "🥪", "🫑", "🌭", "🌯", "🥬", "🧊"]
     
     var body: some View {
-        VStack {
-            Text("Card Game")
-                .font(.largeTitle)
-                .foregroundColor(.gray)
-            
-            LazyVGrid(columns: [GridItem(. adaptive (minimum: 120))]) {
-                ForEach(0..<cardCount, id: \.self) { index in
-                    CardView(content: emojis[index])
+        ScrollView {
+            VStack {
+                Text("Card Game")
+                    .font(.largeTitle)
+                    .foregroundColor(.gray)
+                
+                LazyVGrid(columns: [GridItem(. adaptive (minimum: 120))]) {
+                    ForEach(emojis.indices, id: \.self) { index in
+                        CardView(content: emojis[index])
+                            .aspectRatio(2/3, contentMode: .fit)
+                    }
                 }
             }
-            .foregroundColor(.teal)
-            
-            HStack {
-                Button(action: {
-                    if cardCount < emojis.count {
-                        cardCount += 1
-                    }
-                }, label: {
-                    Image(systemName: "rectangle.stack.badge.plus.fill")
-                })
-                .imageScale(. large)
-                .font(.title2)
-                .padding()
-                .disabled(cardCount >= emojis.count)
-                .foregroundColor(.mint)
-                
-                Button(action: {
-                    if cardCount > 0 {
-                        cardCount -= 1
-                    }
-                }, label: {
-                    Image(systemName: "rectangle.stack.badge.minus.fill")
-                })
-                .imageScale(. large)
-                .font(.title2)
-                .padding()
-                .disabled(cardCount <= 0)
-                .foregroundColor(.mint)
-            }
         }
-        .padding()
     }
 }
 
