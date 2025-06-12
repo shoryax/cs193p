@@ -5,48 +5,51 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    let emojis: [String] = ["🗽", "🗼", "🎆", "🎃", "🍣", "🍫", "🍡", "🍦", "🫧", "🥪", "🫑", "🌭", "🌯", "🥬", "🧊"]
+    var viewModel: EmojiMemoryGame = EmojiMemoryGame()
     
     var body: some View {
         ScrollView {
-            VStack {
-                Text("Card Game")
-                    .font(.largeTitle)
-                    .foregroundColor(.gray)
-                
-                LazyVGrid(columns: [GridItem(. adaptive (minimum: 120))]) {
-                    ForEach(emojis.indices, id: \.self) { index in
-                        CardView(content: emojis[index])
-                            .aspectRatio(2/3, contentMode: .fit)
-                    }
-                }
+            cards
+        }
+        .padding()
+    }
+    var cards: some View {
+        LazyVGrid(columns: [GridItem(.adaptive (minimum: 85), spacing: 0)], spacing: 0) {
+            ForEach(viewModel.cards.indices, id: \.self) { index in
+                CardView(viewModel.cards[index])
+                    .aspectRatio(2/3, contentMode: .fit)
+                    .padding(4)
             }
         }
+        .foregroundColor(Color.orange)
     }
 }
 
 struct CardView: View {
-    let content: String
-    @State var isFaceUp: Bool = true
+    let card: MemoryGame<String>.Card
+    
+    init(_ card: MemoryGame<String>.Card) {
+        self.card = card
+    }
     
     var body: some View {
         ZStack {
             let base = RoundedRectangle(cornerRadius: 12)
-            if isFaceUp {
+            Group {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
-                Text(content)
-                    .font(.largeTitle)
-            } else {
-                base.fill(.teal)
+                Text(card.content)
+                    .font(.system(size: 200))
             }
-        }
-        .onTapGesture {
-            isFaceUp.toggle()
+                .opacity(card.isFaceUp ? 1 : 0)
+            base.fill()
+                .opacity(card.isFaceUp ? 0 : 1)
         }
     }
 }
 
-#Preview {
-    EmojiMemoryGameView()
+struct EmojiMemoryGame_Preview: PreviewProvider {
+    static var previews: some View {
+        EmojiMemoryGameView()
+    }
 }

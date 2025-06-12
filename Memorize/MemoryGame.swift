@@ -23,7 +23,7 @@ struct MemoryGame<CardContent> {
          
     }
     struct Card {
-        var isFaceUp: Bool
+        var isFaceUp = true
         var isMatched: Bool
         var content: CardContent
         
