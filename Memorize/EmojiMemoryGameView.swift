@@ -1,6 +1,6 @@
 //
 //
-// till 4th lec
+// till 4th lec with no visible cards after that boolean updation
 
 import SwiftUI
 
