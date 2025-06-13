@@ -15,15 +15,15 @@ struct MemoryGame<CardContent> {
         //add numberOfPairsOfCards x 2
         for pairIndex in 0..<max(2, numberOfPairsOfCards)  { // _ not used anywhere further in the code
             let content = cardContentFactory(pairIndex)
-            cards.append(Card(isFaceUp: false, isMatched: false, content: content))
-            cards.append(Card(isFaceUp: false, isMatched: false, content: content))
+            cards.append(Card(isFaceUp: true, isMatched: false, content: content))
+            cards.append(Card(isFaceUp: true, isMatched: false, content: content))
         }
     }
     func choose(_  card: Card) {
          
     }
     struct Card {
-        var isFaceUp = true
+        var isFaceUp: Bool
         var isMatched: Bool
         var content: CardContent
         

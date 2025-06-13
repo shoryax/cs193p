@@ -21,7 +21,7 @@ struct EmojiMemoryGameView: View {
                     .padding(4)
             }
         }
-        .foregroundColor(Color.teal)
+        .foregroundColor(Color.orange)
     }
 }
 
@@ -39,7 +39,7 @@ struct CardView: View {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
                 Text(card.content)
-                    .font(.system(size: 200))
+                    .font(.system(size: 50))
             }
                 .opacity(card.isFaceUp ? 1 : 0)
             base.fill()
