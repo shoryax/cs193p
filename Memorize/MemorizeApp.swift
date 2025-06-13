@@ -24,8 +24,9 @@ struct MemorizeApp: App {
     }()
 
     var body: some Scene {
+        @StateObject var game = EmojiMemoryGame()
         WindowGroup {
-            EmojiMemoryGameView()
+            EmojiMemoryGameView(viewModel: game)
         }
         .modelContainer(sharedModelContainer)
     }
